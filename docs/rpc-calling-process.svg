@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="13cm" height="12cm" viewBox="39 -430 246 232" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="67.1751" y1="-427.673" x2="67.1916" y2="-379.443"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="65.1906,-382.324 67.1919,-378.325 69.1906,-382.325 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="69.1201" y1="-377.978" x2="211.044" y2="-377.978"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="208.162,-375.978 212.162,-377.978 208.162,-379.978 "/>
+  </g>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="43.22" y="-413.449">
+    <tspan x="43.22" y="-413.449">Client</tspan>
+    <tspan x="43.22" y="-406.619">Program</tspan>
+  </text>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="72.2816" y="-382.142">
+    <tspan x="72.2816" y="-382.142">send request</tspan>
+  </text>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="71.8262" y="-369.419">
+    <tspan x="71.8262" y="-369.419">json object(method,params,...)</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="87.5899" y="-373.351">
+    <tspan x="87.5899" y="-373.351"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="121.518" y="-370.267">
+    <tspan x="121.518" y="-370.267"></tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="213.837" y1="-377.054" x2="213.674" y2="-337.321"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="211.686,-340.211 213.67,-336.203 215.686,-340.195 "/>
+  </g>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="189.453" y="-417.999">
+    <tspan x="189.453" y="-417.999">Service</tspan>
+    <tspan x="189.453" y="-411.169">daemon</tspan>
+  </text>
+  <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke-dasharray: 4; stroke: #000000" x1="213.837" y1="-428.717" x2="213.854" y2="-378.251"/>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="200.942" y="-418.461">
+    <tspan x="200.942" y="-418.461"></tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="260.657" y1="-333.388" x2="260.495" y2="-293.656"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="258.507,-296.546 260.491,-292.538 262.507,-296.529 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="212.926" y1="-291.324" x2="212.764" y2="-251.592"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="210.776,-254.482 212.759,-250.474 214.776,-254.466 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="213.62" y1="-334.545" x2="257.696" y2="-334.325"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="254.804,-332.34 258.814,-334.32 254.824,-336.34 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="261.088" y1="-292.289" x2="215.13" y2="-292.289"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="218.012,-294.289 214.012,-292.289 218.012,-290.289 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="214.436" y1="-249.878" x2="68.6207" y2="-249.878"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="71.5026,-251.878 67.5026,-249.878 71.5026,-247.878 "/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke-dasharray: 4; stroke: #000000" x1="66.7702" y1="-376.339" x2="66.3846" y2="-251.42"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="66.5562" y1="-249.725" x2="66.5726" y2="-201.495"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="64.5717,-204.376 66.573,-200.377 68.5717,-204.378 "/>
+  </g>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="39.2333" y="-221.448">
+    <tspan x="39.2333" y="-221.448">Program</tspan>
+    <tspan x="39.2333" y="-214.618">continues</tspan>
+  </text>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="74.4667" y="-255.13">
+    <tspan x="74.4667" y="-255.13">Response</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="90.0233" y="-257.653">
+    <tspan x="90.0233" y="-257.653"></tspan>
+  </text>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="74.0463" y="-241.676">
+    <tspan x="74.0463" y="-241.676">json object(result,error,...)</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="108.943" y="-244.199">
+    <tspan x="108.943" y="-244.199"></tspan>
+  </text>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="189.333" y="-355.991">
+    <tspan x="189.333" y="-355.991">search</tspan>
+    <tspan x="189.333" y="-349.161">method</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="179.158" y="-358.56">
+    <tspan x="179.158" y="-358.56"></tspan>
+  </text>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="222.128" y="-337.912">
+    <tspan x="222.128" y="-337.912">call method</tspan>
+  </text>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="263.332" y="-315.628">
+    <tspan x="263.332" y="-315.628">method</tspan>
+    <tspan x="263.332" y="-308.798">execute</tspan>
+  </text>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="220.446" y="-284.094">
+    <tspan x="220.446" y="-284.094">return/answer</tspan>
+  </text>
+  <text font-size="5.46374" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="182.606" y="-274.004">
+    <tspan x="182.606" y="-274.004">request</tspan>
+    <tspan x="182.606" y="-267.174">completed</tspan>
+  </text>
+  <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke-dasharray: 4; stroke: #000000" x1="157.295" y1="-428.46" x2="158.136" y2="-199.631"/>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="132.488" y="-372.015">
+    <tspan x="132.488" y="-372.015"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="129.966" y="-245.46">
+    <tspan x="129.966" y="-245.46"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="54.7057" y="-415.005">
+    <tspan x="54.7057" y="-415.005"></tspan>
+  </text>
+</svg>

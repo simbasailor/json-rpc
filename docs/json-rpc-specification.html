@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>json-rpc-specification</title>
+<!-- 2016-04-29 五 14:00 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="simba" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">json-rpc-specification</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 缘由</a></li>
+<li><a href="#sec-2">2. 概述</a></li>
+<li><a href="#sec-3">3. 约定</a></li>
+<li><a href="#sec-4">4. 兼容性</a></li>
+<li><a href="#sec-5">5. 请求对象</a>
+<ul>
+<li><a href="#sec-5-1">5.1. 通知</a></li>
+<li><a href="#sec-5-2">5.2. 参数结构</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6. 响应对象</a>
+<ul>
+<li><a href="#sec-6-1">6.1. 错误对象</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. 批量调用</a></li>
+<li><a href="#sec-8">8. 示例</a></li>
+</ul>
+</div>
+</div>
+<p>
+JSON-RPC 规范
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 缘由</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+在公司的产品中，一直有关于BIT(Build In Test)的各种需求，其包括的需求繁杂，研发过程、测试、生产等过程都需要在设备端定义一些测试过程，然后在PC上对设备call这些过程。本质上这就是一个远程过程调用(RPC, Remote Procedure Call)。
+</p>
+
+<p>
+在原来的BIT实现中，远程调用过程比较复杂，模块测试的开发者还需要了解远程调用过程中的参数传递与解析，非常不利于维护。为简化代码维护的过程，需要考虑使用一些新的技术，简化远程过程调用的实现。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 概述</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+JSON(JaveScript Object Notation)是一种轻量级的数据交换格式，由一系列的键值对组成。易于人阅读和编写，同时也易于机器解析和生成。JSON采用完全独立于语言的文本格式，也使用了类似于C语言家族的习惯(包括C,C++,C#,Java,JavaScript,Perl,Python,lua等)。这些使得JSON成为理想的数据交换语言。更具体的关于JSON的介绍可以参考其数据格式标准。
+</p>
+
+<p>
+JSON-RPC是一个无状态且轻量级的远程过程调用(RPC)协议。它使用JSON作为数据格式，规范主要定义了一些数据结构及相关的处理规则。它允许运行在基于socket等不同的消息传输环境中。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 约定</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+由于JSON-RPC使用JSON，它具有与其相同的类型系统。JSON可以表示四个基本类型(String, Numbers,Booleans[True/False])和两个结构化类型(Objects和Arrays)。规范中，术语"Primitive"标记4种基本类型为原始类型，"Structured"标记两种结构化类型。任何时候文档涉及JSON数据类型，必须大写。
+</p>
+
+<p>
+在客户端与任何被匹配到的服务端之间交换的所有成员名字应是区分大小写的。函数、方法、过程都可以认为是可以互换的。
+</p>
+
+<p>
+客户端被定义为请求对象的来源及响应对象的处理程序。
+</p>
+
+<p>
+服务端被定义为响应对象的起源和请求对象的处理程序。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 兼容性</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+远程过程调用的需求是明确的的，不同版本之间应该互相兼容。考虑到后续维护需求，可以在协议中定义与版本相关的关键字。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> 请求对象</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+发送一个请求对象至服务端代表一个RPC调用，一个请求对象包含下列成员：
+</p>
+
+<p>
+type
+</p>
+<pre class="example">
+指定当前内容的类型。请求时该值为"Request"(Request/Result)
+</pre>
+
+<p>
+method
+</p>
+<pre class="example">
+该成员必须包含，为"调用接口名称"
+</pre>
+
+<p>
+params
+</p>
+<pre class="example">
+调用方法所需要的结构化参数值，该成员参数可以被省略。
+</pre>
+
+<p>
+id
+</p>
+<pre class="example">
+已建立客户端的唯一标识id，值必须包含一个字符串、数值或NULL空值。
+如果不包含该成员则被认定为是一个通知。
+该值一般不为NULL，若为数值则不应该包含小数。
+</pre>
+
+<p>
+version
+</p>
+<pre class="example">
+指定JSON-RPC协议版本的字符串。暂不使用，可以忽略。
+</pre>
+
+<p>
+服务器端的返回，除type为"Result"外，其余的内容也应该保持相同的值。
+</p>
+</div>
+
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> 通知</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+没有包含"id"成员的请求对象为通知，作为通知的请求对象表明发送端对相应的响应并不关心，接收方不需要回复一个通知。 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> 参数结构</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+rpc调用如果存在参数则必须为基本类型或结构化类型的参数值，或者为索引数组，或者为关联名称的json对象。
+</p>
+
+<ul class="org-ul">
+<li>索引：参数必须为数组，并包含与服务端预期顺序一致的参数值。
+</li>
+<li>关联名称：参数必须为对象，并包含与服务端相匹配的参数成员名称。没有在预期中的成员名称可能会引起错误。名称必须完全匹配，包括方法的预期参数名以及大小写。
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> 响应对象</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+当发起一个rpc调用时，除通知之外，服务端都必须回复响应。响应表示为一个JSON对象，使用以下成员：
+</p>
+
+<p>
+type
+</p>
+<pre class="example">
+指定当前内容的类型。响应时该值为"Result"(Request/Result)
+当该址为"Result"时，为远程调用的返回。
+每个过程调用(Request)，必须存在一个调用回应(Result)。
+</pre>
+
+<p>
+reslut
+</p>
+<pre class="example">
+该成员必须包含，为结构化类型。
+当调用方法成功时，返回为
+   {call:"Success", ret:{结构化的调用返回，由具体调用过程定义该结构}}。
+上述的嵌套的结构化成员ret中必须存在一个成员"result"用于指示调用过程是否成功
+   ("Success"/"Failure")，当"result"为"Failure",应从error中查看具体的失败原因。
+当调用方法失败时(调用过程的内部错误)，返回为 
+   {call:"Failure", "error":{...}}
+   ，此时应从"error"中查看具体的失败原因,此时"error"的参数值必须为6.1中定义的对象。
+</pre>
+
+<p>
+error
+</p>
+<pre class="example">
+当远程过程调用失败时，该成员必须包含。
+当没有引起错误时，不应包含该成员。
+该成员参数值必须为6.1中定义的对象。
+</pre>
+
+<p>
+id
+</p>
+<pre class="example">
+已建立客户端的唯一标识id，值必须包含一个字符串、数值或NULL空值。
+如果不包含该成员则被认定为是一个通知。该值一般不为NULL，若为数值则不应该包含小数。
+</pre>
+
+<p>
+version
+</p>
+<pre class="example">
+指定JSON-RPC协议版本的字符串。暂不使用，可以忽略。
+</pre>
+
+<p>
+响应对象必须包含result成员，error成员只在调用过程出错时包含。
+</p>
+</div>
+
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> 错误对象</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+当一个rpc调用遇到错误时，返回的响应对象必须包含错误成员参数，并且为带有下列成员参数的对象：
+</p>
+
+<p>
+code
+</p>
+<pre class="example">
+使用数值表示该异常的错误类型。必须为整数。
+</pre>
+
+<p>
+msg
+</p>
+<pre class="example">
+对该错误的简单描述字符串。该描述应尽量限定在简短的一句话。
+</pre>
+
+<p>
+data
+</p>
+<pre class="example">
+包含关于错误附加信息的基本类型或结构化类型。
+该成员可忽略。
+该成员值由服务端定义，包含的信息例如详细的错误信息，嵌套的错误等。
+</pre>
+
+<p>
+-32768到-32000为保留的预定义错误代码。该范围内的错误代码不能被明确定义，保留下列以供将来使用。错误代码基本与XML-RPC<a href="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php</a>建议的一样。
+</p>
+<pre class="example">
+code       msg                       meaning
+-32700     Parse error语法解析错误     服务端接收到无效的json。该错误发送于服务器尝试解析json文本
+-32600     Invalid Request无效请求    发送的json不是一个有效的请求对象
+-32601     Method not found找不到方法 该方法不存在或无效
+-32602     Invalid params无效的参数   无效的方法参数
+-32603     Internal error内部错误     JSON-RPC内部错误
+-32000 to  Server error服务端错误     预留用于自定义的服务器错误
+-32099
+</pre>
+
+<p>
+除此之外剩余的错误类型代码可供应用程序作为自定义错误。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> 批量调用</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+当需要同时发送多个请求对象时，客户端可以发送一个包含所有请求的对象的数组。
+</p>
+
+<p>
+当指调用的所有请求对象处理完成时，服务端则需要返回一个包含相对应的响应对象数组。每个响应对象都应对应每个请求对象。除非是通知的请求对象。服务端可以并发的，以任意顺序和任意宽度的并行性来处理这些调用。
+</p>
+
+<p>
+这些相应的响应对象可以任意顺序的包含在返回的数组中，而客户端应该是基于各个响应对象中的id成员来匹配对应的请求对象。
+</p>
+
+<p>
+若指调用的rpc操作本身非一个有效json或一个至少包含一个值的数组，则服务端返回的将单单是一个响应对象而非数组。若批量调用没有需要返回的响应对象，则服务端不需要返回任何结果，且绝不能返回一个空数组给客户端。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> 示例</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Syntax:
+</p>
+<pre class="example">
+--&gt; data sent to Server
+&lt;-- data sent to Client
+</pre>
+
+<p>
+忽略参数的rpc调用：
+</p>
+<pre class="example">
+--&gt; {
+        "type":"Request", 
+        "method":"led_selftest_start",
+        "id":1
+    }
+&lt;-- {
+        "type":"Result", 
+        "result":{
+            "call":"Success", 
+            "ret":{
+                "result":"Success"
+            }
+        }, 
+        "id":1
+    }
+</pre>
+
+<p>
+带索引数组参数的rpc调用：
+</p>
+<pre class="example">
+--&gt; {
+        "type":"Request", 
+        "method": "led_config",
+        "params": {
+            "led_id":1, 
+            "period":2, 
+            "percent":50, 
+            "cycles":10
+        }, 
+        "id":2
+    }
+&lt;-- {
+        "type":"Result", 
+        "result": {
+            "call":"Success", 
+            "ret":{"result":"Success"}
+        }, 
+        "id":2
+    }
+
+--&gt; {
+        "type":"Request", 
+        "method":"camera_set_capture",
+        "params":[200,300], 
+        "id":3
+    }
+&lt;-- {
+        "type":"Result", 
+        "result":{
+            "call":"Success", 
+            "ret":{"result":"Success"}
+        }, 
+        "id":3
+    }
+
+--&gt; {
+        "type":"Request", 
+        "method":"read_eeprom",
+        "params":{
+             "id":"0x1D", 
+             "offset":16, 
+             "size":32
+        }, 
+        "id":5
+    }
+&lt;-- {
+        "type":"Result", 
+        "result":{
+             "call":"Success", 
+             "ret":{
+                 "result":"Success", 
+                 "data":[1...16]
+             }
+        }, 
+        "id":5
+    }
+</pre>
+
+<p>
+不存在的调用方法的rpc调用：
+</p>
+<pre class="example">
+--&gt; {
+        "type":"Request", 
+        "method":"getdataxyz",
+        "id":4
+    }
+&lt;-- {
+        "type":"Result", 
+        "result":{"call":"Failure"}, 
+        "error":{
+            "code":-32601, 
+            "msg":"Method not found"
+        }, 
+        "id":4
+    }
+</pre>
+
+<p>
+包含无效请求对象的rpc调用：
+</p>
+<pre class="example">
+--&gt; {
+        "type":"Request", 
+        "method":"led_selftest_start"
+    }
+&lt;-- {
+        "type":"Result", 
+        "result":{"call":"Failure"}, 
+        "error":{
+            "code": -32600, 
+            "msg": "Invalid Request"
+        }, 
+        "id":null
+    }
+</pre>
+
+<p>
+包含无效json的rpc批量调用：
+</p>
+<pre class="example">
+--&gt; [
+        {
+            "type":"Request", 
+            "method":"rx_desense_test_start",
+            "params":[1, 50000, 3, 2, 5, 1], 
+            "id"=8}
+        {
+            "type":"Request", 
+            "method"
+    ]
+&lt;-- {
+        "type":"Result", 
+        "result":{
+            "call":"Failure"
+        }, 
+        "error":{
+            "code": -32700, 
+            "msg": "Parse error"
+        }, 
+        "id":null
+    }
+</pre>
+
+<p>
+包含空数组的rpc调用：
+</p>
+<pre class="example">
+--&gt; []
+&lt;-- {
+        "type":"Result", 
+        "result":{
+            "call":"Failure"
+        }, 
+        "error":{
+            "code": -32600, 
+            "msg": "Invalid Request"
+        }, 
+        "id":null
+    }
+</pre>
+
+<p>
+非空且无效的rpc批量调用：
+</p>
+<pre class="example">
+--&gt; [1]
+&lt;-- {
+        "type":"Result", 
+        "result":{
+            "call":"Failure"
+        }, 
+        "error":{
+            "code": -32600, 
+            "msg": "Invalid Request"
+        }, 
+        "id":null
+    }
+</pre>
+
+<p>
+无效的rpc批量调用：
+</p>
+<pre class="example">
+--&gt; [1, 2, 3]
+&lt;-- [
+        {
+            "type":"Result", 
+            "result":{
+                "call":"Failure"
+            }, 
+            "error":{
+                "code": -32600, 
+                "msg": "Invalid Request"
+            }, 
+            "id":null
+        }, 
+        {
+            "type":"Result", 
+            "result":{
+                "call":"Failure"
+            }, 
+            "error":{
+                "code": -32600, 
+                "msg": "Invalid Request"
+            }, 
+            "id":null
+        }, 
+        {
+            "type":"Result", 
+            "result":{
+                "call":"Failure"
+            }, 
+            "error":{
+                "code": -32600, 
+                "msg": "Invalid Request"
+            }, 
+            "id":null
+        }
+    ]
+</pre>
+
+<p>
+rpc批量调用：
+</p>
+<pre class="example">
+--&gt; [
+        {
+            "type":"Request", 
+            "method":"led_config",
+            "params":{
+                 "led_id":1, 
+                 "period":2, 
+                 "percent":50, 
+                 "cycles":10
+            }, 
+            "id":2
+        }, 
+        {
+            "type":"Request", 
+            "method":"switch_to_bitmode"
+        }, 
+        {
+            "type":"Request", 
+            "method":"camera_set_capture",
+            "params":[200,300], 
+            "id":3
+        }, 
+        {
+            "type":"Request", 
+            "method":"read_eeprom",
+            "params":{
+                 "id":"0x1D", 
+                 "offset":16, 
+                 "size":32
+            }, 
+            "id":5
+        }, 
+        {"foo":"boo"},
+        {
+            "type":"Request", 
+            "method":"getdataxyz",
+            "id":4
+        }
+    ]
+&lt;-- [
+        {
+            "type":"Result", 
+            "result":{
+                "call":"Success", 
+                "ret":{
+                    "result":"Success"
+                }
+            }, 
+            "id":2
+        },
+        {
+            "type":"Result", 
+            "result":{
+                "call":"Success", 
+                "ret":{
+                    "result":"Success"
+                }
+            }, 
+            "id":3
+        },
+        {
+            "type":"Result", 
+            "result":{
+            "call":"Success", 
+                "ret":{
+                    "result":"Success", 
+                     "data":[1...16]
+                }
+            }, 
+            "id":5
+        }, 
+        {
+            "type":"Result", 
+                "result":{
+                    "call":"Failure"
+                }, 
+                "error":{
+                    "code":-32600, 
+                    "msg":"Invalid Request"
+                }, 
+                "id":null
+        }, 
+        {
+            "type":"Result", 
+                "result":{
+                    "call":"Failure"
+                }, 
+                "error":{
+                    "code":-32601, 
+                    "msg":"Method not found"
+                }, 
+                "id":null
+        } 
+    ]
+</pre>
+
+<p>
+所有都为通知的rpc批量调用：
+</p>
+<pre class="example">
+--&gt; [
+        {
+            "type":"Request", 
+            "method":"switch_to_bitmode"
+        },
+        {
+            "type":"Request", 
+            "method":"reboot_os"
+        }
+    ]
+&lt;-- //Nothing is returned for all notification batches
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: simba</p>
+<p class="date">Created: 2016-04-29 五 14:00</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
