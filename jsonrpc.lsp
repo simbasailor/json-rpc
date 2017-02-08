@@ -15,7 +15,7 @@
   (let ((method (lookup "method" request-json-exp))
         (params (lookup "params" request-json-exp)))
     (if (nil? method)
-        '("type" ))))
+        )))
 
 
 
