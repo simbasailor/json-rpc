@@ -1,4 +1,4 @@
-(context 'json)
+(context 'json2text)
 
 (define (have-atom? lst)
   (and (list? lst)
@@ -55,7 +55,7 @@
         (append "[" str "]")))
    (true nil)))
 
-(define (expr2text lst)
+(define (json2text lst)
   (cond
    ((atom? lst) nil)
    (true (value2text lst))))
