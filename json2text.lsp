@@ -55,7 +55,7 @@
         (append "[" str "]")))
    (true nil)))
 
-(define (json2text lst)
+(define (json2text:json2text lst)
   (cond
    ((atom? lst) nil)
    (true (value2text lst))))
