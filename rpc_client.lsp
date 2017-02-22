@@ -1,6 +1,7 @@
 ;; client connects to sender
 
 (load "json2text.lsp")
+(load "jsonrpc.lsp")
 
 (constant 'max-bytes 4096)
 
