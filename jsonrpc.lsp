@@ -11,6 +11,15 @@
       (json2text request)
       request))
 
+(define (new-request method params id)
+  (let ((request '(("type" "Request"))))
+    (push (list "method" method) request)
+    (if params
+        (push (list "params" params) request))
+    (if id
+        (push (list "id" id) request)
+        request)))
+
 (define (new-method-result result data error)
   (let ((ret nil))
     (if (= result "Success")
@@ -29,10 +38,11 @@
   (let ((response '(("type" "Result"))))
     (if (= call-result "Success")
         (begin
-          (push '("call" "Success") response)
-          (push (list "ret" method-result) response))
+          (push (list "result" (list '("call" "Success"))) response)
+          (push (list "ret" method-result) (lookup "result" response))
+          response)
         (begin
-          (push '("call" "Failure") response)
+          (push (list "result" (list '("call" "Failure"))) response)
           (if (list? call-error)
               (push (list "error" call-error) response))
           response))))
@@ -47,9 +57,9 @@
 
 (define (single-rpc-process request-json-exp)
   (let ((method (lookup "method" request-json-exp))
-        (params (lookup "params" request-json-exp)))
-    (if (nil? method)
-        )))
+        (params (lookup "params" request-json-exp))
+        (id (lookup "id" request-json-exp)))
+    (if (string? method))))
 
 
 
