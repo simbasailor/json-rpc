@@ -11,8 +11,19 @@
       (json2text request)
       request))
 
-(define (new-method-result )
-  )
+(define (new-method-result result data error)
+  (let ((ret nil))
+    (if (= result "Success")
+        (begin
+          (setq ret '(("result" "Success")))
+          (if data
+              (push (list "data" data) ret)
+              ret))
+        (begin
+          (setq ret '(("result" "Failure")))
+          (if (list? error)
+              (push (list "error" error) ret)
+              ret)))))
 
 (define (new-response call-result method-result call-error)
   (let ((response '(("type" "Result"))))
@@ -26,8 +37,13 @@
               (push (list "error" call-error) response))
           response))))
 
-(define (new-error err-no msg data)
-  )
+(define (new-error errcode msg data)
+  (let ((err nil))
+    (setq err (list (list "code" errcode)))
+    (push (list "msg" msg) err)
+    (if data
+        (push (list "data" data) err)
+        err)))
 
 (define (single-rpc-process request-json-exp)
   (let ((method (lookup "method" request-json-exp))

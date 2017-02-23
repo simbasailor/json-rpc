@@ -11,8 +11,7 @@
            (net-receive connect request-str max-bytes)
            (print "get request: " request-str)
            (setq response (new-response "Success" '("result" "Success")))
-           (net-send connect (check-string response))
-           (net-close connect))))
+           (net-send connect (check-string response)))))
 
 (define (rpc-server host-port)
   (let ((socket (net-listen host-port)))
@@ -21,5 +20,6 @@
       (begin
         (set 'online true)
         (print "Server started\n")
-        (rpc-server-accept socket)))))
+        (rpc-server-accept socket)
+        (net-close socket)))))
 
