@@ -7,11 +7,15 @@
 
 (define (rpc-server-accept listen)
   (while online
-         (let ((connect (net-accept listen)) (request-str nil) (response nil))
+         (let ((connect (net-accept listen))
+               (request-str nil)
+               (request-exp nil)
+               (response nil))
            (net-receive connect request-str max-bytes)
            (print "get request: " request-str)
-           (setq response (new-response "Success" '("result" "Success")))
-           (net-send connect (check-string response)))))
+           (setq response (new-response "Success" '(("result" "Success"))))
+           (net-send connect (check-string response))
+           (net-send connect))))
 
 (define (rpc-server host-port)
   (let ((socket (net-listen host-port)))
