@@ -1,5 +1,7 @@
 ;;(context 'jsonrpc)
 
+(set 'rpc-objs "/usr/lib/librpc_objs.so")
+
 (set 'ERROR '((-32700 "RPC_PARSE_ERROR")
               (-32600 "RPC_INVALID")
               (-32601 "RPC_METHOD_NOT_FOUND")
@@ -58,8 +60,17 @@
 (define (single-rpc-process request-json-exp)
   (let ((method (lookup "method" request-json-exp))
         (params (lookup "params" request-json-exp))
-        (id (lookup "id" request-json-exp)))
-    (if (string? method))))
+        (id (lookup "id" request-json-exp))
+        (ret-method nil)
+        (err nil))
+    (let ((rpc-method (import rpc-objs method)))
+      (if rpc-method
+          (begin
+            (setq ret-method (rpc-method (json-c:json_tokener_parse (json2text params))))
+            (new-response "Success" (json-parse (json-c:json_object_to_json_string ret-method))))
+          (begin
+            (setq err (last-error))
+            (new-response "Failure" , (new-error -32601 (err 1))))))))
 
 
 
