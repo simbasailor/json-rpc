@@ -12,11 +12,17 @@
 (context 'json-c)
 
 (cond
- ((= ostype "Linux")
-  ;;(define libjson "/usr/lib/libjson-c.so")
-  (set 'libjson "/usr/lib/x86_64-linux-gnu/libjson-c.so"))
- ((find ostype '("Windows" "Cygwin"))
-  (set 'libjson "libjson-c.dll")))
+ ((= MAIN:ostype "Linux")
+  ;;(setq libjson "/usr/lib/libjson-c.so"))
+  ;;(setq libjson "/usr/lib/x86_64-linux-gnu/libjson-c.so"))
+  (setq libjson "/usr/lib/i386-linux-gnu/libjson-c.so"))
+ ((find MAIN:ostype '("Windows" "Cygwin"))
+  (setq libjson "libjson-c.dll")))
+
+(if (nil? libjson)
+      (begin
+        (println "Can not found json-c library")
+        (exit)))
 
 (import libjson "json_tokener_parse" "void*" "char*")
 (import libjson "json_tokener_free" "void" "void*")
@@ -51,13 +57,22 @@
         (method (args 0))
         (params (args 1))
         (id (args 2)))
-    (json_object_object_add req "type" (json_object_new_string "Request"))
-    (json_object_object_add req "method" (json_object_new_string method))
-    (json_object_object_add req "params" (json_tokener_parse params))
+    (json_object_object_add req
+                            "type"
+                            (json_object_new_string "Request"))
+    (json_object_object_add req
+                            "method"
+                            (json_object_new_string method))
+    (json_object_object_add req
+                            "params"
+                            (json_tokener_parse params))
     (cond
-     ((number? id) (json_object_object_add req "id" (json_object_new_int id)))
-     ((string? id) (json_object_object_add req "id" (json_object_new_string id)))
-     (true req))
+     ((number? id) (json_object_object_add req
+                                           "id"
+                                           (json_object_new_int id)))
+     ((string? id) (json_object_object_add req
+                                           "id"
+                                           (json_object_new_string id))))
     req))
 
 (context MAIN)
