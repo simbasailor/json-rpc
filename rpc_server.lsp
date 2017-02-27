@@ -18,7 +18,9 @@
            (println "get request: " request-str ", size:" rlen)
            
            (setq response (jsonrpc:rpc-process request-str))
-           (net-send connect (jsonrpc:check-string response))
+           (if (and (list? response)
+                    (not (empty? response)))
+               (net-send connect (jsonrpc:check-string response)))
            (net-close connect))))
 
 (define (rpc-server host-port)

@@ -4,6 +4,7 @@
 (context 'jsonrpc)
 
 (set 'librpcobjs "/usr/lib/librpc_objs.so")
+;;(set 'librpcobjs "librpc_objs.so")
 
 (set 'ERROR '((-32700 "RPC_PARSE_ERROR")
               (-32600 "RPC_INVALID")
@@ -113,7 +114,8 @@
           (response nil)
           (err nil))
       
-      (setq rpc-method (import librpcobjs method))
+      ;;(setq rpc-method (import librpcobjs method))
+      (catch (import librpcobjs method) 'rpc-method)
       (if (c-symbol? rpc-method)
           (begin
             (setq ret-method-obj
