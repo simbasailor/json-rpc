@@ -3,7 +3,8 @@
 
 (context 'jsonrpc)
 
-(set 'librpcobjs "/usr/lib/librpc_objs.so")
+;;(set 'librpcobjs "/usr/lib/librpc_objs.so")
+(set 'librpcobjs "./librpc_objs.so")
 ;;(set 'librpcobjs "librpc_objs.so")
 
 (set 'ERROR '((-32700 "RPC_PARSE_ERROR")
@@ -130,9 +131,10 @@
             response)
           (begin
             (setq err (last-error))
+            (println "err occurred: " err)
             (new-response "Failure" ,
                           (new-error -32601
-                                     (err 1)
+                                     (errcode2msg -32601)
                                      request-json-exp)))))))
 
 (define (rpc-process request-str)

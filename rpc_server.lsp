@@ -20,7 +20,9 @@
            (setq response (jsonrpc:rpc-process request-str))
            (if (and (list? response)
                     (not (empty? response)))
-               (net-send connect (jsonrpc:check-string response)))
+               (begin
+                 (println "return response: " (jsonrpc:check-string response))
+                 (net-send connect (jsonrpc:check-string response))))
            (net-close connect))))
 
 (define (rpc-server host-port)
