@@ -16,8 +16,8 @@
   ;;(setq libjson "/usr/lib/libjson-c.so"))
   ;;(setq libjson "/usr/lib/x86_64-linux-gnu/libjson-c.so"))
   (setq libjson "/usr/lib/i386-linux-gnu/libjson-c.so"))
- ((find MAIN:ostype '("Windows" "Cygwin"))
-  (setq libjson "libjson-c.dll")))
+ ((find MAIN:ostype '("Windows" "Cygwin" "Win32"))
+  (setq libjson "libjson-c-3.dll")))
 
 (if (nil? libjson)
       (begin
